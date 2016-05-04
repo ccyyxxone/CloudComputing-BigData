@@ -1,0 +1,13 @@
+part1
+aws ec2 create-volume --size 1 --region us-east-1 --availability-zone us-east-1b --volume-type gp2
+
+aws ec2 attach-volume --volume-id vol-cddd686e --instance-id i-50f398c8 --device /dev/sdf
+
+ssh -i "Yixing.pem" ec2-user@ec2-52-90-248-124.compute-1.amazonaws.com
+
+sudo mkfs -t ext4 /dev/xvdf
+sudo mkdir /test
+sudo mount /dev/xvdf /test
+
+part 2
+aws ec2 create-image --instance-id i-50f398c8 --name "YixingTest" --description "Test"
